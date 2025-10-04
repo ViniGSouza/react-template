@@ -1,9 +1,14 @@
-import type { RouteObject } from "react-router-dom";
+import type { AppRouteObject } from "@/shared/types";
 import { DashboardPage } from "../pages";
 
-export const dashboardRoutes: RouteObject[] = [
+export const dashboardRoutes: AppRouteObject[] = [
   {
     path: "dashboard",
     element: <DashboardPage />,
+    handle: {
+      title: "Dashboard",
+      breadcrumb: "Início",
+      icon: "LayoutDashboard",
+    },
   },
 ];

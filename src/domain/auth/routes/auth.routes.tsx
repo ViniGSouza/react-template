@@ -1,7 +1,7 @@
-import type { RouteObject } from "react-router-dom";
+import type { AppRouteObject } from "@/shared/types";
 import { LoginPage } from "../pages";
 
-export const authRoutes: RouteObject[] = [
+export const authRoutes: AppRouteObject[] = [
   {
     path: "/login",
     element: <LoginPage />,

@@ -1,9 +1,30 @@
-import type { RouteObject } from "react-router-dom";
-import { ProposalsPage } from "../pages";
+import { Outlet } from "react-router-dom";
+import type { AppRouteObject } from "@/shared/types";
+import { ProposalsPage, ProposalDetailPage } from "../pages";
 
-export const proposalsRoutes: RouteObject[] = [
+export const proposalsRoutes: AppRouteObject[] = [
   {
     path: "proposals",
-    element: <ProposalsPage />,
+    element: <Outlet />,
+    handle: {
+      title: "Propostas",
+      breadcrumb: "Propostas",
+      icon: "FileText",
+    },
+    children: [
+      {
+        index: true,
+        element: <ProposalsPage />,
+      },
+      {
+        path: ":id",
+        element: <ProposalDetailPage />,
+        handle: {
+          title: "Detalhes da Proposta",
+          breadcrumb: "Detalhes",
+          icon: "FileText",
+        },
+      },
+    ],
   },
 ];

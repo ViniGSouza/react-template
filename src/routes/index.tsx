@@ -1,16 +1,13 @@
-import { useRoutes, Navigate } from "react-router-dom";
-import type { RouteObject } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { AppLayout } from "@/layouts";
 import { ProtectedRoute } from "@/shared/components";
+import type { AppRouteObject } from "@/shared/types";
 import { authRoutes } from "@/domain/auth/routes";
 import { dashboardRoutes } from "@/domain/dashboard/routes";
 import { proposalsRoutes } from "@/domain/proposals/routes";
 
-const routes: RouteObject[] = [
-  // Rotas públicas
+export const routes: AppRouteObject[] = [
   ...authRoutes,
-
-  // Rotas protegidas
   {
     path: "/",
     element: (
@@ -24,11 +21,5 @@ const routes: RouteObject[] = [
       ...proposalsRoutes,
     ],
   },
-
-  // Fallback
   { path: "*", element: <Navigate to="/dashboard" replace /> },
 ];
-
-export const AppRoutes = () => {
-  return useRoutes(routes);
-};

@@ -1,5 +1,6 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import { useNavigate } from "react-router-dom";
 import type { Proposal } from "@/shared/types";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
@@ -35,13 +36,25 @@ export const ProposalCard = ({
   onDelete,
   isLoading,
 }: ProposalCardProps) => {
+  const navigate = useNavigate();
   const user = useUser();
   const isManager = user?.role === "manager";
   const isOwner = user?.id === proposal.createdBy;
   const isPending = proposal.status === "pending";
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    // Evita navegação se clicar em um botão
+    if ((e.target as HTMLElement).closest("button")) {
+      return;
+    }
+    navigate(`/proposals/${proposal.id}`);
+  };
+
   return (
-    <Card className="group relative overflow-hidden border-0 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
+    <Card
+      className="group relative overflow-hidden border-0 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02] cursor-pointer"
+      onClick={handleCardClick}
+    >
       <div className="absolute inset-0 bg-gradient-to-br via-transparent to-transparent opacity-0 transition-opacity pointer-events-none from-primary/5 group-hover:opacity-100" />
 
       <CardHeader className="relative">
