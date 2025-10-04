@@ -1,0 +1,88 @@
+/**
+ * Auth Service Tests
+ * Testa a funcionalidade de autenticação usando mock
+ */
+
+import { describe, it, expect, beforeEach } from "vitest";
+import { authService } from "../services/authService";
+import { storage } from "@/core/storage";
+
+describe("Auth Service", () => {
+  beforeEach(() => {
+    storage.clear();
+  });
+
+  describe("login", () => {
+    it("deve fazer login com credenciais válidas de vendedor", async () => {
+      const result = await authService.login("vendedor@agisales.com", "123456");
+
+      expect(result).toHaveProperty("user");
+      expect(result).toHaveProperty("token");
+      expect(result.user.email).toBe("vendedor@agisales.com");
+      expect(result.user.role).toBe("seller");
+      expect(result.token).toContain("mock-token");
+
+      // Verifica se salvou no storage
+      const storedToken = storage.get<string>("token");
+      const storedUser = storage.get("user");
+      expect(storedToken).toBe(result.token);
+      expect(storedUser).toEqual(result.user);
+    });
+
+    it("deve fazer login com credenciais válidas de gerente", async () => {
+      const result = await authService.login("gerente@agisales.com", "123456");
+
+      expect(result.user.role).toBe("manager");
+      expect(result.user.email).toBe("gerente@agisales.com");
+    });
+
+    it("deve lançar erro com credenciais inválidas", async () => {
+      await expect(
+        authService.login("invalido@email.com", "senhaerrada")
+      ).rejects.toThrow("Credenciais inválidas");
+    });
+
+    it("deve lançar erro com senha incorreta", async () => {
+      await expect(
+        authService.login("vendedor@agisales.com", "senhaerrada")
+      ).rejects.toThrow("Credenciais inválidas");
+    });
+  });
+
+  describe("logout", () => {
+    it("deve fazer logout e limpar o storage", async () => {
+      // Faz login primeiro
+      await authService.login("vendedor@agisales.com", "123456");
+
+      // Verifica que tem dados no storage
+      expect(storage.get("token")).not.toBeNull();
+      expect(storage.get("user")).not.toBeNull();
+
+      // Faz logout
+      await authService.logout();
+
+      // Verifica que limpou o storage
+      expect(storage.get("token")).toBeNull();
+      expect(storage.get("user")).toBeNull();
+    });
+  });
+
+  describe("getMe", () => {
+    it("deve retornar o usuário atual se autenticado", async () => {
+      const loginResult = await authService.login(
+        "vendedor@agisales.com",
+        "123456"
+      );
+
+      const user = await authService.getMe();
+
+      expect(user).toEqual(loginResult.user);
+    });
+
+    it("deve lançar erro se não estiver autenticado", async () => {
+      storage.clear();
+
+      await expect(authService.getMe()).rejects.toThrow("Não autenticado");
+    });
+  });
+});
