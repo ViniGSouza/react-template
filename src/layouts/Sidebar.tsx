@@ -2,13 +2,13 @@ import { Link, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   FileText,
-  Sparkles,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/shared/components/ui/button";
 import { useState } from "react";
+import Logo from "@/brand/Logo";
 
 interface NavItem {
   path: string;
@@ -41,24 +41,13 @@ export const Sidebar = () => {
         collapsed ? "w-20" : "w-64"
       )}
     >
-      <div className="flex justify-between items-center pl-2 h-16 border-b border-border/40">
-        {!collapsed ? (
+      <div className="flex justify-between items-center mx-auto h-16 border-b border-border/40">
+        {!collapsed && (
           <Link
             to="/dashboard"
-            className="flex gap-2 items-center text-lg font-bold transition-transform hover:scale-105"
+            className="flex items-center px-2 transition-transform hover:scale-105"
           >
-            <div className="flex justify-center items-center w-8 h-8 bg-gradient-to-br rounded-lg shadow-lg from-primary to-primary/80 shadow-primary/30">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-primary/80">
-              Agisales V2
-            </span>
-          </Link>
-        ) : (
-          <Link to="/dashboard" className="flex justify-center items-center">
-            <div className="flex justify-center items-center w-8 h-8 bg-gradient-to-br rounded-lg shadow-lg from-primary to-primary/80 shadow-primary/30">
-              <Sparkles className="w-5 h-5 text-primary-foreground" />
-            </div>
+            <Logo className="w-40" />
           </Link>
         )}
 
