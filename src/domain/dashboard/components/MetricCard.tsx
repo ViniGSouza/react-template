@@ -34,7 +34,6 @@ export const MetricCard = ({
         className
       )}
     >
-      {}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-50" />
 
       <CardHeader className="relative flex flex-row items-center justify-between space-y-0 pb-2">

@@ -8,3 +8,7 @@ export * from "./hooks";
 export * from "./schemas";
 
 export * from "./types";
+
+export * from "./pages";
+
+export * from "./routes";

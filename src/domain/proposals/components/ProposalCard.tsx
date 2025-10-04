@@ -42,7 +42,6 @@ export const ProposalCard = ({
 
   return (
     <Card className="group relative overflow-hidden border-0 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
-      {}
       <div className="absolute inset-0 bg-gradient-to-br via-transparent to-transparent opacity-0 transition-opacity pointer-events-none from-primary/5 group-hover:opacity-100" />
 
       <CardHeader className="relative">

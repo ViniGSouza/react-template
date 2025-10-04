@@ -82,7 +82,6 @@ export const NotificationsDropdown = () => {
 
         {open && (
           <DropdownMenuContent align="end" className="p-0">
-            {}
             <div className="flex justify-between items-center px-4 py-3 border-b bg-card">
               <div>
                 <h3 className="font-semibold">Notificações</h3>
@@ -116,7 +115,6 @@ export const NotificationsDropdown = () => {
               )}
             </div>
 
-            {}
             <div className="min-w-[300px] max-h-[400px] overflow-y-auto">
               {notifications.length === 0 ? (
                 <div className="flex flex-col justify-center items-center py-8 text-center">
