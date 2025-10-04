@@ -3,7 +3,6 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./styles/globals.css";
 
-// Inicializa MSW para mock de API em desenvolvimento
 async function enableMocking() {
   if (import.meta.env.VITE_USE_MOCK !== "true") {
     return;

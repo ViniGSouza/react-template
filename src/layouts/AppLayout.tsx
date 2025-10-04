@@ -21,83 +21,81 @@ export const AppLayout = () => {
 
   return (
     <div className="flex min-h-screen">
-      {/* Sidebar */}
       <Sidebar />
 
-      {/* Main Content */}
-      <div className="flex flex-1 flex-col overflow-hidden">
-        {/* Top Header */}
-        <header className="sticky top-0 z-40 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="flex h-16 items-center justify-between px-6">
-            {/* Breadcrumb ou título - pode ser expandido depois */}
-            <div>
-              <h1 className="text-lg font-semibold tracking-tight">
-                {/* Pode ser dinâmico baseado na rota */}
-              </h1>
-            </div>
+      <div className="flex overflow-hidden flex-col flex-1">
+        <header className="sticky top-0 z-40 border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+          <div className="flex justify-between items-center px-6 h-16">
+            <div className="flex-1" />
 
-            {/* Actions */}
-            <div className="flex items-center gap-2">
+            <div className="flex gap-2 items-center">
               <ThemeToggle />
               <NotificationsDropdown />
 
-              {/* User Menu */}
               <div className="relative">
                 <Button
                   variant="ghost"
-                  className="flex items-center gap-2 h-9"
+                  className="flex gap-3 items-center h-10 hover:bg-accent"
                   onClick={() => setUserMenuOpen(!userMenuOpen)}
                 >
-                  <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10 text-primary">
-                    <User className="h-4 w-4" />
+                  <div className="flex justify-center items-center w-8 h-8 bg-gradient-to-br rounded-full ring-2 from-primary/20 to-primary/5 text-primary ring-primary/10">
+                    <User className="w-4 h-4" />
                   </div>
-                  <div className="hidden md:block text-left">
+                  <div className="hidden text-left md:block">
                     <p className="text-sm font-medium leading-none">
                       {user?.name}
                     </p>
-                    <Badge
-                      variant={
-                        user?.role === "manager" ? "default" : "secondary"
-                      }
-                      className="text-xs mt-1"
-                    >
+                    <p className="text-xs text-muted-foreground mt-0.5">
                       {user?.role === "manager" ? "Gerente" : "Vendedor"}
-                    </Badge>
+                    </p>
                   </div>
                   <ChevronDown
                     className={cn(
-                      "h-4 w-4 transition-transform",
+                      "h-4 w-4 transition-transform text-muted-foreground",
                       userMenuOpen && "rotate-180"
                     )}
                   />
                 </Button>
 
-                {/* Dropdown Menu */}
                 {userMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-56 rounded-lg border border-border bg-card/95 backdrop-blur-xl p-2 shadow-2xl animate-in fade-in-0 zoom-in-95 z-[100]">
-                    <div className="px-3 py-2 border-b mb-2">
-                      <p className="text-sm font-medium">{user?.name}</p>
-                      <p className="text-xs text-muted-foreground">
-                        {user?.email}
-                      </p>
+                  <>
+                    <div
+                      className="fixed inset-0 z-40"
+                      onClick={() => setUserMenuOpen(false)}
+                    />
+                    <div className="absolute right-0 mt-2 w-64 rounded-lg border bg-card p-1.5 shadow-lg animate-in fade-in-0 zoom-in-95 z-50">
+                      <div className="px-3 py-3 mb-1">
+                        <p className="text-sm font-semibold">{user?.name}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5">
+                          {user?.email}
+                        </p>
+                        <Badge
+                          variant={
+                            user?.role === "manager" ? "default" : "secondary"
+                          }
+                          className="mt-2 text-xs"
+                        >
+                          {user?.role === "manager" ? "Gerente" : "Vendedor"}
+                        </Badge>
+                      </div>
+                      <div className="my-1 h-px bg-border" />
+                      <Button
+                        variant="ghost"
+                        className="gap-2 justify-start w-full text-destructive hover:text-destructive hover:bg-destructive/10"
+                        onClick={handleLogout}
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Sair
+                      </Button>
                     </div>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start gap-2 text-destructive hover:text-destructive hover:bg-destructive/10"
-                      onClick={handleLogout}
-                    >
-                      <LogOut className="h-4 w-4" />
-                      Sair
-                    </Button>
-                  </div>
+                  </>
                 )}
               </div>
             </div>
           </div>
         </header>
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-y-auto bg-gradient-to-br from-background via-background/95 to-primary/5 p-6">
+        <main className="overflow-y-auto flex-1 p-6 bg-background">
           <div className="mx-auto max-w-7xl">
             <Outlet />
           </div>

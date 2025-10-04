@@ -1,8 +1,3 @@
-/**
- * Proposals API
- * Camada de comunicação com a API - apenas requisições HTTP
- */
-
 import { api } from "@/api";
 import type { Proposal } from "@/shared/types";
 

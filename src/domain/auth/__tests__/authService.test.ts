@@ -1,8 +1,3 @@
-/**
- * Auth Service Tests
- * Testa a funcionalidade de autenticação usando mock
- */
-
 import { describe, it, expect, beforeEach } from "vitest";
 import { authService } from "../services/authService";
 import { storage } from "@/core/storage";
@@ -22,7 +17,6 @@ describe("Auth Service", () => {
       expect(result.user.role).toBe("seller");
       expect(result.token).toContain("mock-token");
 
-      // Verifica se salvou no storage
       const storedToken = storage.get<string>("token");
       const storedUser = storage.get("user");
       expect(storedToken).toBe(result.token);
@@ -51,17 +45,14 @@ describe("Auth Service", () => {
 
   describe("logout", () => {
     it("deve fazer logout e limpar o storage", async () => {
-      // Faz login primeiro
+      
       await authService.login("vendedor@agisales.com", "123456");
 
-      // Verifica que tem dados no storage
       expect(storage.get("token")).not.toBeNull();
       expect(storage.get("user")).not.toBeNull();
 
-      // Faz logout
       await authService.logout();
 
-      // Verifica que limpou o storage
       expect(storage.get("token")).toBeNull();
       expect(storage.get("user")).toBeNull();
     });

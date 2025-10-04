@@ -1,8 +1,3 @@
-/**
- * Theme Provider
- * Aplica o tema no documento
- */
-
 import { useEffect } from "react";
 import { useThemeStore } from "@/core/store/theme.store";
 
@@ -16,4 +11,11 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [theme]);
 
   return <>{children}</>;
+};
+
+export const useTheme = () => {
+  const theme = useThemeStore((state) => state.theme);
+  const setTheme = useThemeStore((state) => state.setTheme);
+
+  return { theme, setTheme };
 };

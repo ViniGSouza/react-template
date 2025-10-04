@@ -1,8 +1,3 @@
-/**
- * Proposals Service Tests
- * Testa a funcionalidade de propostas usando mock
- */
-
 import { describe, it, expect, beforeEach } from "vitest";
 import { proposalsService } from "../services/proposalsService";
 import { storage } from "@/core/storage";

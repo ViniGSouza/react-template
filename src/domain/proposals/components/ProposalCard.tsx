@@ -42,11 +42,11 @@ export const ProposalCard = ({
 
   return (
     <Card className="group relative overflow-hidden border-0 shadow-lg transition-all hover:shadow-xl hover:scale-[1.02]">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+      {}
+      <div className="absolute inset-0 bg-gradient-to-br via-transparent to-transparent opacity-0 transition-opacity pointer-events-none from-primary/5 group-hover:opacity-100" />
 
       <CardHeader className="relative">
-        <div className="flex items-start justify-between gap-3">
+        <div className="flex gap-3 justify-between items-start">
           <div className="flex-1 min-w-0">
             <CardTitle className="text-lg truncate">
               {proposal.product}

@@ -1,8 +1,3 @@
-/**
- * Proposals Service (Use Cases)
- * Camada de lógica de negócio - orquestra API calls e regras de negócio
- */
-
 import { proposalsApi } from "../api/proposalsApi";
 import { storage } from "@/core/storage";
 import type { Proposal } from "@/shared/types";
@@ -15,10 +10,8 @@ import type { CreateProposalData } from "../types";
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 const STORAGE_KEY = "proposals";
 
-// Helper para simular delay
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
-// Mock helpers
 const getStoredProposals = (): Proposal[] => {
   const stored = storage.get<Proposal[]>(STORAGE_KEY);
   if (!stored) {
@@ -32,7 +25,6 @@ const saveProposals = (proposals: Proposal[]): void => {
   storage.set(STORAGE_KEY, proposals);
 };
 
-// Mock implementations
 const mockGetAll = async (): Promise<Proposal[]> => {
   await delay(500);
   return getStoredProposals();
@@ -114,7 +106,6 @@ const mockDelete = async (id: string): Promise<void> => {
   saveProposals(filtered);
 };
 
-// Service (Use Cases)
 export const proposalsService = {
   getAll: async (): Promise<Proposal[]> => {
     return USE_MOCK ? await mockGetAll() : await proposalsApi.getAll();

@@ -1,8 +1,3 @@
-/**
- * Storage Service
- * Abstração do localStorage com namespace
- */
-
 const STORAGE_PREFIX = "agisales";
 
 class StorageService {
@@ -42,7 +37,7 @@ class StorageService {
 
   clear(): void {
     try {
-      // Remove apenas items com nosso prefix
+      
       Object.keys(localStorage).forEach((key) => {
         if (key.startsWith(`${STORAGE_PREFIX}:`)) {
           localStorage.removeItem(key);

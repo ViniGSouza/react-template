@@ -1,7 +1,3 @@
-/**
- * Dashboard Components Barrel Export
- */
-
 export * from "./DashboardView";
 export * from "./MetricCard";
 export * from "./ProposalsChart";

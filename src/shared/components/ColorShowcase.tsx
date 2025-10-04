@@ -1,8 +1,3 @@
-/**
- * Color Showcase - Debug Component
- * Mostra as cores do sistema para debug
- */
-
 export const ColorShowcase = () => {
   return (
     <div className="fixed bottom-4 right-4 w-64 rounded-lg border bg-card p-4 shadow-2xl z-[200]">

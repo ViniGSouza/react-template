@@ -1,8 +1,3 @@
-/**
- * Theme Store - Zustand
- * Gerencia o estado global do tema (light/dark)
- */
-
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 

@@ -1,20 +1,12 @@
-/**
- * useProposals Hook
- * Hook customizado para gerenciar propostas com TanStack Query
- */
-
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { proposalsService } from "../services/proposalsService";
-import { useNotificationsStore } from "@/core";
+import { toast } from "sonner";
 import type { Proposal } from "@/shared/types";
 
 const QUERY_KEY = ["proposals"];
 
 export const useProposals = () => {
   const queryClient = useQueryClient();
-  const addNotification = useNotificationsStore(
-    (state) => state.addNotification
-  );
 
   const {
     data: proposals = [],
@@ -29,11 +21,14 @@ export const useProposals = () => {
     mutationFn: (data: Partial<Proposal>) => proposalsService.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-      addNotification({
-        type: "success",
-        title: "Proposta criada!",
-        message:
+      toast.success("Proposta criada!", {
+        description:
           "Sua proposta foi criada com sucesso e está aguardando aprovação.",
+      });
+    },
+    onError: (error: Error) => {
+      toast.error("Erro ao criar proposta", {
+        description: error.message || "Ocorreu um erro ao criar a proposta.",
       });
     },
   });
@@ -43,10 +38,13 @@ export const useProposals = () => {
       proposalsService.update(id, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-      addNotification({
-        type: "info",
-        title: "Proposta atualizada",
-        message: "As alterações foram salvas com sucesso.",
+      toast.info("Proposta atualizada", {
+        description: "As alterações foram salvas com sucesso.",
+      });
+    },
+    onError: (error: Error) => {
+      toast.error("Erro ao atualizar proposta", {
+        description: error.message,
       });
     },
   });
@@ -55,10 +53,13 @@ export const useProposals = () => {
     mutationFn: (id: string) => proposalsService.delete(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
-      addNotification({
-        type: "info",
-        title: "Proposta excluída",
-        message: "A proposta foi removida com sucesso.",
+      toast.success("Proposta excluída", {
+        description: "A proposta foi removida com sucesso.",
+      });
+    },
+    onError: (error: Error) => {
+      toast.error("Erro ao excluir proposta", {
+        description: error.message,
       });
     },
   });
@@ -68,10 +69,13 @@ export const useProposals = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
-      addNotification({
-        type: "success",
-        title: "Proposta aprovada!",
-        message: "A proposta foi aprovada com sucesso.",
+      toast.success("Proposta aprovada!", {
+        description: "A proposta foi aprovada com sucesso.",
+      });
+    },
+    onError: (error: Error) => {
+      toast.error("Erro ao aprovar proposta", {
+        description: error.message,
       });
     },
   });
@@ -81,10 +85,13 @@ export const useProposals = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEY });
       queryClient.invalidateQueries({ queryKey: ["dashboard"] });
-      addNotification({
-        type: "warning",
-        title: "Proposta rejeitada",
-        message: "A proposta foi rejeitada.",
+      toast.warning("Proposta rejeitada", {
+        description: "A proposta foi rejeitada.",
+      });
+    },
+    onError: (error: Error) => {
+      toast.error("Erro ao rejeitar proposta", {
+        description: error.message,
       });
     },
   });

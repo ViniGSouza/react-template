@@ -1,8 +1,3 @@
-/**
- * Auth API
- * Camada de comunicação com a API - apenas requisições HTTP
- */
-
 import { api } from "@/api";
 import type { User } from "@/shared/types";
 import type { LoginRequest, LoginResponse } from "../types/authTypes";

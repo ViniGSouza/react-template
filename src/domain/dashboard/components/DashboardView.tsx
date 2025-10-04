@@ -30,7 +30,7 @@ export const DashboardView = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
-      {/* Header */}
+      {}
       <div className="space-y-2">
         <h2 className="text-4xl font-bold tracking-tight">Dashboard</h2>
         <p className="text-lg text-muted-foreground">
@@ -38,7 +38,7 @@ export const DashboardView = () => {
         </p>
       </div>
 
-      {/* Main Metrics */}
+      {}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         <MetricCard
           title="Total de Propostas"
@@ -71,13 +71,13 @@ export const DashboardView = () => {
         />
       </div>
 
-      {/* Charts */}
+      {}
       <div className="grid gap-6 lg:grid-cols-2">
         <ProposalsChart data={metrics.proposalsByMonth} />
         <TopProductsChart data={metrics.topProducts} />
       </div>
 
-      {/* Status Cards */}
+      {}
       <div>
         <h3 className="mb-4 text-xl font-semibold">Status das Propostas</h3>
         <div className="grid gap-4 md:grid-cols-3">

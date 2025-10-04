@@ -1,8 +1,3 @@
-/**
- * useAuth Hook
- * Hook customizado para gerenciar autenticação
- */
-
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { authService } from "../services/authService";
 import { storage } from "@/core";

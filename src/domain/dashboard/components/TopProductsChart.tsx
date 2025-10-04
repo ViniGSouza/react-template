@@ -37,7 +37,7 @@ const chartConfig = {
 export const TopProductsChart = ({ data }: TopProductsChartProps) => {
   const formattedData = data.map((item) => ({
     ...item,
-    // Encurta o nome do produto para caber no gráfico
+    
     productShort:
       item.name.length > 25 ? `${item.name.substring(0, 25)}...` : item.name,
   }));

@@ -1,8 +1,3 @@
-/**
- * Dashboard Service (Use Cases)
- * Camada de lógica de negócio - orquestra API calls e cálculo de métricas
- */
-
 import { dashboardApi, type DashboardMetrics } from "../api/dashboardApi";
 import { storage } from "@/core/storage";
 import { mockProposals } from "@/test/fixtures/proposals.fixture";
@@ -10,7 +5,6 @@ import type { Proposal } from "@/shared/types";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 
-// Helper
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const getProposals = (): Proposal[] => {
@@ -88,7 +82,6 @@ const getTopProducts = (proposals: Proposal[]) => {
     .slice(0, 5);
 };
 
-// Mock implementation
 const mockGetMetrics = async (): Promise<DashboardMetrics> => {
   await delay(500);
 
@@ -127,7 +120,6 @@ const mockGetMetrics = async (): Promise<DashboardMetrics> => {
   };
 };
 
-// Service (Use Cases)
 export const dashboardService = {
   getMetrics: async (): Promise<DashboardMetrics> => {
     return USE_MOCK ? await mockGetMetrics() : await dashboardApi.getMetrics();

@@ -1,8 +1,3 @@
-/**
- * Theme Toggle Button
- * Botão para alternar entre light e dark mode
- */
-
 import { Moon, Sun } from "lucide-react";
 import { useThemeStore } from "@/core/store/theme.store";
 import { Button } from "./button";

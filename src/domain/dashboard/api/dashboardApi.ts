@@ -1,8 +1,3 @@
-/**
- * Dashboard API
- * Camada de comunicação com a API - apenas requisições HTTP
- */
-
 import { api } from "@/api";
 
 export interface DashboardMetrics {

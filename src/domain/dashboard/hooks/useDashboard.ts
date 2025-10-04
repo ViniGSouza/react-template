@@ -1,7 +1,3 @@
-/**
- * useDashboard Hook
- */
-
 import { useQuery } from "@tanstack/react-query";
 import { dashboardService } from "../services/dashboardService";
 
@@ -13,7 +9,7 @@ export const useDashboard = () => {
   } = useQuery({
     queryKey: ["dashboard", "metrics"],
     queryFn: () => dashboardService.getMetrics(),
-    refetchInterval: 30000, // Atualiza a cada 30 segundos
+    refetchInterval: 30000, 
   });
 
   return {

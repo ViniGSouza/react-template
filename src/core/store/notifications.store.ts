@@ -1,8 +1,3 @@
-/**
- * Notifications Store - Zustand
- * Gerencia o estado global de notificações
- */
-
 import { create } from "zustand";
 
 export type NotificationType = "success" | "error" | "warning" | "info";

@@ -1,8 +1,3 @@
-/**
- * Auth Types
- * Tipos específicos do domínio de autenticação
- */
-
 import type { User } from "@/shared/types";
 
 export interface LoginRequest {
