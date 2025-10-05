@@ -36,7 +36,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <Card className="w-full max-w-md shadow-xl border-0 bg-card/50 backdrop-blur-sm">
+    <Card className="w-full max-w-md shadow-xl border border-border bg-card backdrop-blur-sm">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl font-bold">Bem-vindo de volta</CardTitle>
         <CardDescription>
@@ -85,14 +85,16 @@ export const LoginForm = () => {
             {isLoggingIn ? "Entrando..." : "Entrar"}
           </Button>
 
-          <div className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <p className="font-medium">Credenciais de teste:</p>
-            <div className="space-y-1">
+          <div className="mt-4 space-y-2 text-sm text-muted-foreground border-t border-border pt-4">
+            <p className="font-medium text-foreground">Credenciais de teste:</p>
+            <div className="space-y-1 text-xs">
               <p>
-                <strong>Vendedor:</strong> vendedor@agisales.com / 123456
+                <strong className="text-foreground">Vendedor:</strong>{" "}
+                vendedor@agisales.com / 123456
               </p>
               <p>
-                <strong>Gerente:</strong> gerente@agisales.com / 123456
+                <strong className="text-foreground">Gerente:</strong>{" "}
+                gerente@agisales.com / 123456
               </p>
             </div>
           </div>

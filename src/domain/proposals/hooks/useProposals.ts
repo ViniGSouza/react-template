@@ -112,17 +112,3 @@ export const useProposals = () => {
     isRejecting: rejectMutation.isPending,
   };
 };
-
-export const useProposal = (id: string) => {
-  const {
-    data: proposal,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: [...QUERY_KEY, id],
-    queryFn: () => proposalsService.getById(id),
-    enabled: !!id,
-  });
-
-  return { proposal, isLoading, error };
-};

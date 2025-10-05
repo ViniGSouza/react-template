@@ -3,7 +3,7 @@ import { Breadcrumb } from "@/shared/components";
 
 export const ProposalsPage = () => {
   return (
-    <div className="container mx-auto py-8">
+    <div className="container mx-auto py-4">
       <Breadcrumb />
       <ProposalsList />
     </div>

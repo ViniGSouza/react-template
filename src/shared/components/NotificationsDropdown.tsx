@@ -117,7 +117,7 @@ export const NotificationsDropdown = () => {
 
             <div className="min-w-[300px] max-h-[400px] overflow-y-auto">
               {notifications.length === 0 ? (
-                <div className="flex flex-col justify-center items-center py-8 text-center">
+                <div className="flex flex-col justify-center items-center py-4 text-center">
                   <Bell className="mb-2 w-8 h-8 text-muted-foreground/50" />
                   <p className="text-sm text-muted-foreground">
                     Nenhuma notificação

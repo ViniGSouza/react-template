@@ -12,10 +12,3 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return <>{children}</>;
 };
-
-export const useTheme = () => {
-  const theme = useThemeStore((state) => state.theme);
-  const setTheme = useThemeStore((state) => state.setTheme);
-
-  return { theme, setTheme };
-};

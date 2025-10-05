@@ -1,4 +1,4 @@
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import {
@@ -64,7 +64,7 @@ export const ProposalDetailPage = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-4">
         <div className="flex h-64 items-center justify-center">
           <p className="text-muted-foreground">Carregando proposta...</p>
         </div>
@@ -74,7 +74,7 @@ export const ProposalDetailPage = () => {
 
   if (!proposal) {
     return (
-      <div className="container mx-auto py-8">
+      <div className="container mx-auto py-4">
         <div className="flex h-64 items-center justify-center flex-col gap-4">
           <p className="text-muted-foreground">Proposta não encontrada</p>
           <Button onClick={() => navigate("/proposals")} variant="outline">
@@ -86,7 +86,7 @@ export const ProposalDetailPage = () => {
   }
 
   return (
-    <div className="container mx-auto py-8 animate-in fade-in duration-500">
+    <div className="container mx-auto py-4 animate-in fade-in duration-500">
       <Breadcrumb />
 
       <div className="mb-6">
@@ -118,7 +118,6 @@ export const ProposalDetailPage = () => {
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {/* Informações do Cliente */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -141,7 +140,6 @@ export const ProposalDetailPage = () => {
           </CardContent>
         </Card>
 
-        {/* Informações da Proposta */}
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -171,7 +169,6 @@ export const ProposalDetailPage = () => {
           </CardContent>
         </Card>
 
-        {/* Descrição */}
         <Card className="md:col-span-2">
           <CardHeader>
             <CardTitle>Descrição</CardTitle>
@@ -183,7 +180,6 @@ export const ProposalDetailPage = () => {
           </CardContent>
         </Card>
 
-        {/* Histórico */}
         <Card className="md:col-span-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -252,7 +248,6 @@ export const ProposalDetailPage = () => {
         </Card>
       </div>
 
-      {/* Ações para Gerente */}
       {isManager && isPending && (
         <Card className="mt-6 border-primary/20">
           <CardHeader>

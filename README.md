@@ -1,6 +1,6 @@
-# Agisales - Plataforma de Gestão de Propostas
+# React Template - Clean Architecture + DDD
 
-Uma plataforma moderna e escalável para gestão de propostas comerciais, desenvolvida com as melhores práticas de engenharia de software.
+Template moderno para aplicações React seguindo os princípios de **Clean Architecture** e **Domain-Driven Design (DDD)**, pronto para escalar e manter.
 
 ## 🚀 Stack Tecnológica
 
@@ -18,291 +18,199 @@ Uma plataforma moderna e escalável para gestão de propostas comerciais, desenv
 ### UI e Estilização
 
 - **Tailwind CSS** - Framework CSS utility-first
-- **Shadcn/ui** - Componentes UI reutilizáveis
+- **Shadcn/ui** - Componentes UI reutilizáveis e acessíveis
 - **Recharts** - Biblioteca de gráficos
 
 ### Formulários e Validação
 
-- **React Hook Form** - Gerenciamento de formulários
-- **Zod** - Schema validation
+- **React Hook Form** - Gerenciamento de formulários performático
+- **Zod** - Schema validation com TypeScript
 
 ### Testes
 
-- **Vitest** - Test runner
+- **Vitest** - Test runner rápido e moderno
 - **React Testing Library** - Testes de componentes
-- **MSW (Mock Service Worker)** - Mock de API
+- **MSW (Mock Service Worker)** - Mock de API para desenvolvimento e testes
 
 ### Utilitários
 
 - **date-fns** - Manipulação de datas
 - **clsx + tailwind-merge** - Gerenciamento de classes CSS
 
-## 📁 Arquitetura do Projeto
+## 📁 Arquitetura
 
-O projeto segue uma arquitetura baseada em **Domain-Driven Design (DDD)** adaptada para frontend, com separação clara de responsabilidades:
+Estrutura baseada em **DDD** adaptada para frontend, com separação clara de responsabilidades:
 
-\`\`\`
+```
 src/
-├── domain/ # Módulos de domínio (features)
-│ ├── auth/ # Autenticação
-│ │ ├── components/ # Componentes específicos
-│ │ ├── hooks/ # Hooks customizados
-│ │ ├── services/ # Lógica de negócio e adapters
-│ │ ├── schemas/ # Validações Zod
-│ │ └── types/ # Tipos TypeScript
-│ ├── proposals/ # Gestão de propostas
-│ └── dashboard/ # Dashboard e métricas
+├── domain/                    # Módulos de domínio (features)
+│   ├── [feature]/
+│   │   ├── components/       # Componentes específicos do domínio
+│   │   ├── hooks/            # Hooks customizados
+│   │   ├── services/         # Lógica de negócio
+│   │   ├── api/              # Chamadas HTTP
+│   │   ├── schemas/          # Validações Zod
+│   │   ├── types/            # Tipos TypeScript
+│   │   ├── pages/            # Páginas do domínio
+│   │   └── routes/           # Rotas do domínio
 │
-├── shared/ # Código compartilhado
-│ ├── components/ui/ # Componentes UI reutilizáveis
-│ ├── hooks/ # Hooks compartilhados
-│ ├── lib/ # Utilitários
-│ └── types/ # Tipos compartilhados
+├── shared/                    # Código compartilhado entre domínios
+│   ├── components/ui/        # Componentes UI reutilizáveis
+│   ├── hooks/                # Hooks compartilhados
+│   ├── lib/                  # Utilitários e helpers
+│   └── types/                # Tipos compartilhados
 │
-├── core/ # Infraestrutura
-│ ├── api/ # Cliente HTTP
-│ ├── adapters/ # Interfaces de adapters
-│ └── storage/ # Gerenciamento de storage
+├── core/                      # Infraestrutura da aplicação
+│   ├── storage/              # Gerenciamento de storage
+│   └── store/                # Estado global (Zustand)
 │
-├── pages/ # Páginas da aplicação
-├── layouts/ # Layouts compartilhados
-├── test/ # Configuração e mocks de teste
-│ ├── mocks/ # Handlers MSW
-│ └── fixtures/ # Dados de teste
-└── styles/ # Estilos globais
-\`\`\`
+├── api/                       # Configuração de APIs
+├── layouts/                   # Layouts compartilhados
+├── routes/                    # Configuração de rotas
+├── test/                      # Configuração e mocks de teste
+│   ├── mocks/                # Handlers MSW
+│   └── fixtures/             # Dados de teste
+└── styles/                    # Estilos globais
+```
 
-## 🎯 Padrões de Design Implementados
+## 🎯 Princípios Aplicados
 
-### Adapter Pattern
+### Clean Architecture
 
-Utilizado para abstrair a comunicação com APIs, permitindo trocar facilmente entre implementação mock e real:
+- **Separação de camadas**: Domínio, Aplicação, Infraestrutura
+- **Inversão de dependências**: Abstrações não dependem de implementações
+- **Independência de frameworks**: Lógica de negócio isolada
+- **Testabilidade**: Cada camada pode ser testada independentemente
 
-\`\`\`typescript
-// Interface comum
-interface AuthAdapter {
-login(email: string, password: string): Promise<AuthResponse>;
-}
+### Domain-Driven Design (DDD)
 
-// Implementação Mock
-class AuthMockAdapter implements AuthAdapter { ... }
+- **Organização por domínio**: Features isoladas e coesas
+- **Ubiquitous Language**: Nomenclatura consistente
+- **Bounded Contexts**: Cada domínio tem seu próprio contexto
 
-// Implementação Real
-class AuthApiAdapter implements AuthAdapter { ... }
+### SOLID
 
-// Service Factory
-class AuthService {
-private adapter: AuthAdapter;
-constructor() {
-this.adapter = USE_MOCK ? new AuthMockAdapter() : new AuthApiAdapter();
-}
-}
-\`\`\`
+- **Single Responsibility**: Cada módulo tem uma única responsabilidade
+- **Open/Closed**: Aberto para extensão, fechado para modificação
+- **Liskov Substitution**: Substituição de implementações sem quebrar o código
+- **Interface Segregation**: Interfaces específicas e granulares
+- **Dependency Inversion**: Dependa de abstrações, não de implementações
 
-### Repository Pattern
+### Padrões de Design
 
-Abstraindo a fonte de dados para propostas e usuários.
+- **Adapter Pattern**: Abstração de APIs (mock/real)
+- **Repository Pattern**: Abstração de fontes de dados
+- **Hook Pattern**: Lógica reutilizável em hooks customizados
+- **Factory Pattern**: Criação de instâncias de serviços
 
-### Hook Pattern
-
-Encapsulando lógica reutilizável em hooks customizados.
-
-## 🔧 Instalação e Execução
+## 🔧 Como Usar
 
 ### Pré-requisitos
 
 - Node.js 18+
-- npm ou yarn
+- npm, yarn ou pnpm
 
 ### Instalação
 
-\`\`\`bash
-
+```bash
 # Instalar dependências
-
 npm install
 
 # Executar em modo desenvolvimento
-
 npm run dev
 
 # Build para produção
-
 npm run build
 
 # Preview da build
-
 npm run preview
-\`\`\`
+```
 
 ### Variáveis de Ambiente
 
-Crie um arquivo \`.env\` na raiz do projeto:
+Crie um arquivo `.env` na raiz:
 
-\`\`\`env
+```env
 VITE_API_URL=http://localhost:3000/api
 VITE_USE_MOCK=true
-\`\`\`
+```
 
-- \`VITE_USE_MOCK=true\`: Usa mocks para desenvolvimento sem backend
-- \`VITE_USE_MOCK=false\`: Usa API real
+- `VITE_USE_MOCK=true`: Usa mocks (desenvolvimento sem backend)
+- `VITE_USE_MOCK=false`: Usa API real
 
 ## 🧪 Testes
 
-\`\`\`bash
-
+```bash
 # Executar testes
-
 npm test
 
 # Testes com UI
-
 npm run test:ui
 
 # Testes com coverage
-
 npm run test:coverage
-\`\`\`
+```
 
-### Metas de Coverage
+## 🎨 Features Incluídas
 
-- **Lines**: 80%
-- **Functions**: 80%
-- **Branches**: 80%
-- **Statements**: 80%
+- ✅ Dark Mode
+- ✅ Autenticação com rotas protegidas
+- ✅ Sistema de notificações (toast)
+- ✅ Breadcrumbs automáticos
+- ✅ Error Boundary
+- ✅ Layout responsivo
+- ✅ Mock de API com MSW
+- ✅ Testes unitários configurados
+- ✅ TypeScript estrito
+- ✅ ESLint configurado
 
-## 👥 Funcionalidades
+## 📦 Adicionando Novos Domínios
 
-### Autenticação
+1. Crie a estrutura dentro de `src/domain/[nome-do-dominio]/`
+2. Siga a estrutura:
 
-- Login com e-mail e senha
-- Validação com Zod
-- Gerenciamento de sessão com localStorage
-- Rotas protegidas
+```
+[nome-do-dominio]/
+├── components/
+├── hooks/
+├── services/
+├── api/
+├── schemas/
+├── types/
+├── pages/
+└── routes/
+```
 
-**Credenciais de teste:**
-
-- **Vendedor**: vendedor@agisales.com / 123456
-- **Gerente**: gerente@agisales.com / 123456
-
-### Dashboard
-
-- KPIs em tempo real:
-  - Total de propostas
-  - Propostas pendentes
-  - Taxa de aprovação
-  - Valor total aprovado
-- Gráficos:
-  - Propostas por mês
-  - Top produtos/serviços
-  - Distribuição por status
-
-### Gestão de Propostas
-
-- **Vendedor pode:**
-
-  - Criar novas propostas
-  - Visualizar suas propostas
-  - Editar propostas em rascunho
-
-- **Gerente pode:**
-  - Visualizar todas as propostas
-  - Aprovar propostas pendentes
-  - Rejeitar propostas pendentes
-
-## 🏗️ Princípios Aplicados
-
-### Clean Code
-
-- Nomenclatura descritiva
-- Funções pequenas e focadas
-- Comentários apenas quando necessário
-- DRY (Don't Repeat Yourself)
-
-### Clean Architecture
-
-- Separação de camadas
-- Inversão de dependências
-- Independência de frameworks
-- Testabilidade
-
-### SOLID
-
-- **S**ingle Responsibility Principle
-- **O**pen/Closed Principle
-- **L**iskov Substitution Principle
-- **I**nterface Segregation Principle
-- **D**ependency Inversion Principle
-
-## 📈 Performance e Otimizações
-
-- **Code Splitting**: Rotas carregadas sob demanda
-- **Query Caching**: TanStack Query com cache inteligente
-- **Memoization**: Hooks com useMemo e useCallback quando necessário
-- **Lazy Loading**: Componentes carregados sob demanda
-
-## 🔒 Segurança
-
-- Validação de formulários no client e server
-- Sanitização de inputs
-- Tokens de autenticação em localStorage
-- Rotas protegidas
-- CORS configurado
-
-## 🚀 Próximos Passos
-
-### Backend Integration
-
-Quando o backend estiver pronto, basta alterar a variável de ambiente:
-
-\`\`\`env
-VITE_USE_MOCK=false
-VITE_API_URL=https://api.agisales.com
-\`\`\`
-
-Os adapters estão prontos para consumir a API real sem necessidade de alterações no código de negócio.
-
-### Melhorias Futuras
-
-- [ ] Notificações em tempo real (WebSocket)
-- [ ] Exportação de relatórios (PDF, Excel)
-- [ ] Filtros avançados e busca
-- [ ] Histórico de alterações
-- [ ] Multi-idioma (i18n)
-- [x] Dark mode
-- [ ] PWA (Progressive Web App)
-- [ ] E2E tests com Playwright
+3. Registre as rotas em `src/routes/index.tsx`
+4. Mantenha o domínio isolado e coeso
 
 ## 📝 Scripts Disponíveis
 
-\`\`\`json
-{
-"dev": "Inicia servidor de desenvolvimento",
-"build": "Compila para produção",
-"preview": "Preview da build de produção",
-"test": "Executa testes",
-"test:ui": "Executa testes com UI",
-"test:coverage": "Executa testes com coverage",
-"lint": "Executa linter"
-}
-\`\`\`
+```bash
+npm run dev          # Desenvolvimento
+npm run build        # Build produção
+npm run preview      # Preview da build
+npm test             # Executar testes
+npm run test:ui      # Testes com UI
+npm run test:coverage # Coverage report
+npm run lint         # Executar linter
+```
 
-## 🤝 Contribuindo
+## 🚀 Próximos Passos
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (\`git checkout -b feature/AmazingFeature\`)
-3. Commit suas mudanças (\`git commit -m 'Add some AmazingFeature'\`)
-4. Push para a branch (\`git push origin feature/AmazingFeature\`)
-5. Abra um Pull Request
+Após clonar este template:
+
+1. Renomeie o projeto no `package.json`
+2. Configure suas variáveis de ambiente
+3. Adicione seus próprios domínios em `src/domain/`
+4. Configure a URL da sua API real
+5. Customize o tema em `src/styles/globals.css`
+6. Atualize este README com informações do seu projeto
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT.
-
-## 👨‍💻 Autor
-
-Desenvolvido com ❤️ seguindo as melhores práticas de engenharia de software.
+MIT
 
 ---
 
-**Observação**: Este projeto foi desenvolvido como uma base escalável e de fácil manutenção. A arquitetura permite adicionar novas features sem comprometer a estrutura existente.
+**Template desenvolvido seguindo as melhores práticas de engenharia de software, arquitetura escalável e código limpo.**
