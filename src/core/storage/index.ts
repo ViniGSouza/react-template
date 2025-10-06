@@ -1,4 +1,4 @@
-const STORAGE_PREFIX = "agisales";
+const STORAGE_PREFIX = "app";
 
 class StorageService {
   private getKey(key: string): string {
@@ -37,7 +37,6 @@ class StorageService {
 
   clear(): void {
     try {
-      
       Object.keys(localStorage).forEach((key) => {
         if (key.startsWith(`${STORAGE_PREFIX}:`)) {
           localStorage.removeItem(key);

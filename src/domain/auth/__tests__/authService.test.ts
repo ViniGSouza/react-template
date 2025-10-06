@@ -9,11 +9,11 @@ describe("Auth Service", () => {
 
   describe("login", () => {
     it("deve fazer login com credenciais válidas de vendedor", async () => {
-      const result = await authService.login("vendedor@agisales.com", "123456");
+      const result = await authService.login("vendedor@example.com", "123456");
 
       expect(result).toHaveProperty("user");
       expect(result).toHaveProperty("token");
-      expect(result.user.email).toBe("vendedor@agisales.com");
+      expect(result.user.email).toBe("vendedor@example.com");
       expect(result.user.role).toBe("seller");
       expect(result.token).toContain("mock-token");
 
@@ -24,10 +24,10 @@ describe("Auth Service", () => {
     });
 
     it("deve fazer login com credenciais válidas de gerente", async () => {
-      const result = await authService.login("gerente@agisales.com", "123456");
+      const result = await authService.login("gerente@example.com", "123456");
 
       expect(result.user.role).toBe("manager");
-      expect(result.user.email).toBe("gerente@agisales.com");
+      expect(result.user.email).toBe("gerente@example.com");
     });
 
     it("deve lançar erro com credenciais inválidas", async () => {
@@ -38,15 +38,14 @@ describe("Auth Service", () => {
 
     it("deve lançar erro com senha incorreta", async () => {
       await expect(
-        authService.login("vendedor@agisales.com", "senhaerrada")
+        authService.login("vendedor@example.com", "senhaerrada")
       ).rejects.toThrow("Credenciais inválidas");
     });
   });
 
   describe("logout", () => {
     it("deve fazer logout e limpar o storage", async () => {
-      
-      await authService.login("vendedor@agisales.com", "123456");
+      await authService.login("vendedor@example.com", "123456");
 
       expect(storage.get("token")).not.toBeNull();
       expect(storage.get("user")).not.toBeNull();
@@ -61,7 +60,7 @@ describe("Auth Service", () => {
   describe("getMe", () => {
     it("deve retornar o usuário atual se autenticado", async () => {
       const loginResult = await authService.login(
-        "vendedor@agisales.com",
+        "vendedor@example.com",
         "123456"
       );
 

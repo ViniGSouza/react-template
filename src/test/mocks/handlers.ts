@@ -6,24 +6,24 @@ export const handlers = [
   http.post(`${API_URL}/auth/login`, async ({ request }) => {
     const body = (await request.json()) as { email: string; password: string };
 
-    if (body.email === "vendedor@agisales.com" && body.password === "123456") {
+    if (body.email === "vendedor@example.com" && body.password === "123456") {
       return HttpResponse.json({
         user: {
           id: "1",
           name: "João Vendedor",
-          email: "vendedor@agisales.com",
+          email: "vendedor@example.com",
           role: "seller",
         },
         token: "mock-token-seller-123",
       });
     }
 
-    if (body.email === "gerente@agisales.com" && body.password === "123456") {
+    if (body.email === "gerente@example.com" && body.password === "123456") {
       return HttpResponse.json({
         user: {
           id: "2",
           name: "Maria Gerente",
-          email: "gerente@agisales.com",
+          email: "gerente@example.com",
           role: "manager",
         },
         token: "mock-token-manager-456",
@@ -51,7 +51,7 @@ export const handlers = [
       return HttpResponse.json({
         id: "1",
         name: "João Vendedor",
-        email: "vendedor@agisales.com",
+        email: "vendedor@example.com",
         role: "seller",
       });
     }
@@ -59,7 +59,7 @@ export const handlers = [
     return HttpResponse.json({
       id: "2",
       name: "Maria Gerente",
-      email: "gerente@agisales.com",
+      email: "gerente@example.com",
       role: "manager",
     });
   }),

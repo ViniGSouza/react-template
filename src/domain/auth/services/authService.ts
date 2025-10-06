@@ -8,14 +8,14 @@ const MOCK_USERS = [
   {
     id: "1",
     name: "Vendedor Teste",
-    email: "vendedor@agisales.com",
+    email: "vendedor@example.com",
     password: "123456",
     role: "seller" as const,
   },
   {
     id: "2",
     name: "Gerente Teste",
-    email: "gerente@agisales.com",
+    email: "gerente@example.com",
     password: "123456",
     role: "manager" as const,
   },

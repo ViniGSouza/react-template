@@ -28,7 +28,7 @@ export const useNotificationsStore = create<NotificationsStore>((set) => ({
     {
       id: "1",
       type: "info",
-      title: "Bem-vindo ao Agisales!",
+      title: "Bem-vindo ao React Template!",
       message: "Explore o dashboard para ver suas métricas e propostas.",
       timestamp: new Date(),
       read: false,

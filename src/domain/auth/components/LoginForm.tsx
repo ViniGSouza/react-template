@@ -94,11 +94,11 @@ export const LoginForm = () => {
             <div className="space-y-1 text-xs">
               <p>
                 <strong className="text-foreground">Vendedor:</strong>{" "}
-                vendedor@agisales.com / 123456
+                vendedor@example.com / 123456
               </p>
               <p>
                 <strong className="text-foreground">Gerente:</strong>{" "}
-                gerente@agisales.com / 123456
+                gerente@example.com / 123456
               </p>
             </div>
           </div>
