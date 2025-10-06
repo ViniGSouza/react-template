@@ -1,13 +1,14 @@
 import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "@/domain/auth/hooks/useAuth";
+import { useAuthUser } from "@/domain/auth/hooks";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
 }
 
 export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { isAuthenticated, isLoading } = useAuth();
+  const { data: user, isLoading } = useAuthUser();
   const location = useLocation();
+  const isAuthenticated = !!user;
 
   if (isLoading) {
     return (

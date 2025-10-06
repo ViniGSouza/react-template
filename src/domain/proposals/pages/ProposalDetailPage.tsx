@@ -9,7 +9,11 @@ import {
   FileText,
   DollarSign,
 } from "lucide-react";
-import { useProposal } from "../hooks/useProposal";
+import {
+  useProposalDetail,
+  useApproveProposal,
+  useRejectProposal,
+} from "../hooks";
 import { Breadcrumb } from "@/shared/components";
 import { Button } from "@/shared/components/ui/button";
 import { Badge } from "@/shared/components/ui/badge";
@@ -20,7 +24,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { useUser } from "@/domain/auth/hooks/useAuth";
+import { useAuthUser } from "@/domain/auth/hooks";
 
 const statusMap = {
   pending: { label: "Pendente", variant: "warning" as const },
@@ -32,16 +36,16 @@ const statusMap = {
 export const ProposalDetailPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const user = useUser();
+  const { data: user } = useAuthUser();
 
-  const {
-    proposal,
-    isLoading,
-    approveProposal,
-    rejectProposal,
-    isApproving,
-    isRejecting,
-  } = useProposal(id!);
+  // Query hook
+  const { data: proposal, isLoading } = useProposalDetail(id!);
+
+  // Mutation hooks - apenas instancia os que usa
+  const { mutateAsync: approveProposal, isPending: isApproving } =
+    useApproveProposal();
+  const { mutateAsync: rejectProposal, isPending: isRejecting } =
+    useRejectProposal();
 
   const isManager = user?.role === "manager";
   const isPending = proposal?.status === "pending";

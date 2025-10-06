@@ -1,4 +1,4 @@
-import type { Proposal } from "@/shared/types";
+import type { Proposal } from "@/domain/proposals/types";
 
 export const mockProposals: Proposal[] = [
   {

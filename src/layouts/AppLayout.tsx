@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuth } from "@/domain/auth/hooks/useAuth";
+import { useAuthUser, useLogout } from "@/domain/auth/hooks";
 import { Button } from "@/shared/components/ui/button";
 import { ThemeToggle } from "@/shared/components/ui/theme-toggle";
 import { NotificationsDropdown } from "@/shared/components/NotificationsDropdown";
@@ -10,7 +10,8 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 
 export const AppLayout = () => {
-  const { user, logout } = useAuth();
+  const { data: user } = useAuthUser();
+  const { mutateAsync: logout } = useLogout();
   const navigate = useNavigate();
   const [userMenuOpen, setUserMenuOpen] = useState(false);
 

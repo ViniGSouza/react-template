@@ -1,7 +1,6 @@
 import { authApi } from "../api/authApi";
-import type { LoginRequest, LoginResponse } from "../types/authTypes";
+import type { LoginRequest, LoginResponse, User } from "../types";
 import { storage } from "@/core/storage";
-import type { User } from "@/shared/types";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 
@@ -76,7 +75,6 @@ export const authService = {
   },
 
   logout: async (): Promise<void> => {
-    
     if (!USE_MOCK) {
       await authApi.logout();
     } else {
@@ -88,7 +86,6 @@ export const authService = {
   },
 
   getMe: async (): Promise<User> => {
-    
     const user = USE_MOCK ? await mockGetMe() : await authApi.getMe();
 
     storage.set("user", user);

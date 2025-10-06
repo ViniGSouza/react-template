@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { ProposalCard } from "./ProposalCard";
-import { useProposals } from "../hooks/useProposals";
+import {
+  useProposalsList,
+  useCreateProposal,
+  useApproveProposal,
+  useRejectProposal,
+  useDeleteProposal,
+} from "../hooks";
 import { Button } from "@/shared/components/ui/button";
 import {
   Dialog,
@@ -15,18 +21,18 @@ import type { ProposalFormData } from "../schemas/proposal.schema";
 export const ProposalsList = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
-  const {
-    proposals,
-    isLoading,
-    createProposal,
-    approveProposal,
-    rejectProposal,
-    deleteProposal,
-    isCreating,
-    isApproving,
-    isRejecting,
-    isDeleting,
-  } = useProposals();
+  // Query hooks
+  const { data: proposals = [], isLoading } = useProposalsList();
+
+  // Mutation hooks - apenas instancia os que usa
+  const { mutateAsync: createProposal, isPending: isCreating } =
+    useCreateProposal();
+  const { mutateAsync: approveProposal, isPending: isApproving } =
+    useApproveProposal();
+  const { mutateAsync: rejectProposal, isPending: isRejecting } =
+    useRejectProposal();
+  const { mutateAsync: deleteProposal, isPending: isDeleting } =
+    useDeleteProposal();
 
   const handleCreate = async (data: ProposalFormData) => {
     try {

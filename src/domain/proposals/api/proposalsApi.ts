@@ -1,5 +1,5 @@
 import { api } from "@/api";
-import type { Proposal } from "@/shared/types";
+import type { Proposal } from "../types";
 
 export const proposalsApi = {
   getAll: async (): Promise<Proposal[]> => {

@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { proposalsService } from "../services/proposalsService";
 import { storage } from "@/core/storage";
-import type { Proposal } from "@/shared/types";
+import type { Proposal } from "../types";
 
 describe("Proposals Service", () => {
   beforeEach(() => {

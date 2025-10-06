@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
+import { useLogin } from "../hooks";
 import { loginSchema, type LoginFormData } from "../schemas/login.schema";
 import { Button } from "@/shared/components/ui/button";
 import { Input } from "@/shared/components/ui/input";
@@ -16,7 +16,11 @@ import {
 
 export const LoginForm = () => {
   const navigate = useNavigate();
-  const { login, isLoggingIn, loginError } = useAuth();
+  const {
+    mutateAsync: login,
+    isPending: isLoggingIn,
+    error: loginError,
+  } = useLogin();
 
   const {
     register,

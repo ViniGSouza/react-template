@@ -1,7 +1,7 @@
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useNavigate } from "react-router-dom";
-import type { Proposal } from "@/shared/types";
+import type { Proposal } from "../types";
 import { Badge } from "@/shared/components/ui/badge";
 import { Button } from "@/shared/components/ui/button";
 import {
@@ -12,7 +12,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/shared/components/ui/card";
-import { useUser } from "@/domain/auth/hooks/useAuth";
+import { useAuthUser } from "@/domain/auth/hooks";
 
 interface ProposalCardProps {
   proposal: Proposal;
@@ -37,7 +37,7 @@ export const ProposalCard = ({
   isLoading,
 }: ProposalCardProps) => {
   const navigate = useNavigate();
-  const user = useUser();
+  const { data: user } = useAuthUser();
   const isManager = user?.role === "manager";
   const isOwner = user?.id === proposal.createdBy;
   const isPending = proposal.status === "pending";

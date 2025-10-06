@@ -1,7 +1,8 @@
-import { dashboardApi, type DashboardMetrics } from "../api/dashboardApi";
+import { dashboardApi } from "../api/dashboardApi";
+import type { DashboardMetrics } from "../types";
 import { storage } from "@/core/storage";
 import { mockProposals } from "@/test/fixtures/proposals.fixture";
-import type { Proposal } from "@/shared/types";
+import type { Proposal } from "@/domain/proposals/types";
 
 const USE_MOCK = import.meta.env.VITE_USE_MOCK === "true";
 
